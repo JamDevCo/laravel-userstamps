@@ -2,7 +2,7 @@
 
 namespace Hrshadhin\Userstamps;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -148,6 +148,14 @@ trait UserstampsTrait
         }
 
         return '';
+    }
+
+
+    public function isCreator($user_id=null) {
+        if( !isset($user_id) ) {
+            $user_id == auth()->user()->id;
+        }
+        return $this->created_by == $user_id;
     }
     
 }
